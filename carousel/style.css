@@ -6,6 +6,7 @@
   box-sizing: border-box;
   list-style: none;
 }
+
 .container {
   width: 80%;
   height: 100vh;
@@ -15,11 +16,49 @@
   align-items: center;
   position: relative;
 }
+
+.start-stop {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 10px;
+  left: 20px;
+  width: 60px;
+}
+
+.start-button,
+.stop-button {
+  color: whitesmoke;
+  border-radius: 50%;
+  border: 0;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.start-button:active,
+.stop-button:active {
+  transform: scale(0.93);
+}
+
+.start-button.active,
+.stop-button.active {
+  color: rgb(46, 44, 44);
+}
+
+.start-button:focus,
+.stop-button:focus {
+  outline: none;
+}
+
 .carousel {
   width: 1200px;
   height: 600px;
   overflow: hidden;
   border-radius: 10px;
+  position: relative;
 }
 .slider {
   height: 100%;

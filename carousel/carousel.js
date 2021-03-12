@@ -12,6 +12,8 @@
   const $next = document.querySelector('.next');
   const $pageCircles = document.querySelector('.page-circles');
   const $circlesArr = Array.from($pageCircles.children);
+  const $start = document.querySelector('.start-button');
+  const $stop = document.querySelector('.stop-button');
 
   const movePageTransition = () => {
     window.requestAnimationFrame(() => {
@@ -37,25 +39,75 @@
     renderActiveCircle($circlesArr);
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  // 자동 슬라이드 함수
+  const startSlidePageAutomatically = () => {
+    currentPage++;
+    movePageTransition();
     renderActiveCircle($circlesArr);
+  };
+
+  // 자동 슬라이드 멈추기
+  const stopSlidePageAutomatically = timerId => {
+    clearInterval(timerId);
+
+    $stop.classList.add('active');
+    $start.classList.remove('active');
+  };
+
+  // next, prev 버튼을 누르고 화면 전환이 된 후로 다시 3초이후에 자동 슬라이드 되도록 하는 함수
+  const delaySlidePageAutomatically = timerId => {
+    clearTimeout(timerId);
+    timerId = setInterval(startSlidePageAutomatically, 3500);
+    return timerId;
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    let timerId = setInterval(startSlidePageAutomatically, 3500);
+
+    renderActiveCircle($circlesArr);
+
+    $start.addEventListener('click', () => {
+      if ($start.classList.contains('active')) return;
+
+      $start.classList.add('active');
+      $stop.classList.remove('active');
+      timerId = setInterval(startSlidePageAutomatically, 3500);
+    });
+
+    $stop.addEventListener('click', () => {
+      stopSlidePageAutomatically(timerId);
+    });
+
+    $next.addEventListener(
+      'click',
+      _.throttle(() => {
+        if ($start.classList.contains('active')) {
+          timerId = delaySlidePageAutomatically(timerId);
+        }
+        currentPage++;
+        movePageTransition();
+      }, 300)
+    );
+
+    $prev.addEventListener(
+      'click',
+      _.throttle(() => {
+        if ($start.classList.contains('active')) {
+          timerId = delaySlidePageAutomatically(timerId);
+        }
+        currentPage--;
+        movePageTransition();
+      }, 300)
+    );
+
+    $pageCircles.addEventListener('click', e => {
+      if (!e.target.matches('.page-circle')) return;
+      if ($start.classList.contains('active')) {
+        timerId = delaySlidePageAutomatically(timerId);
+      }
+      clickPageCircle(e.target);
+    });
   });
-
-  $next.addEventListener(
-    'click',
-    _.throttle(() => {
-      currentPage++;
-      movePageTransition();
-    }, 300)
-  );
-
-  $prev.addEventListener(
-    'click',
-    _.throttle(() => {
-      currentPage--;
-      movePageTransition();
-    }, 300)
-  );
 
   $slider.addEventListener('transitionend', () => {
     if (currentPage >= state.imageNumbers + 1) {
@@ -67,10 +119,5 @@
       pauseTransition();
     }
     renderActiveCircle($circlesArr);
-  });
-
-  $pageCircles.addEventListener('click', e => {
-    if (!e.target.matches('.page-circle')) return;
-    clickPageCircle(e.target);
   });
 })();
