@@ -14,7 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+}
+
+.carousel:hover .prev,
+.carousel:hover .next {
+  background-color: rgba(197, 191, 191, 0.4);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .start-stop {
@@ -36,6 +41,11 @@
   height: 30px;
   cursor: pointer;
   transition: 0.3s all;
+}
+
+.start-button:hover,
+.stop-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .start-button:active,
@@ -60,6 +70,7 @@
   border-radius: 10px;
   position: relative;
 }
+
 .slider {
   height: 100%;
   display: flex;
@@ -91,10 +102,13 @@
   position: absolute;
   display: flex;
   justify-content: space-between;
-  bottom: 200px;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 140px;
   color: transparent;
   cursor: pointer;
+  transition: 0.3s transform;
 }
 
 .page-circle {
@@ -104,7 +118,20 @@
   background-color: white;
 }
 
+@keyframes getBigger {
+  0% {
+    transform: scale(0.2);
+  }
+  80% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .page-circle.active {
+  animation: getBigger 0.5s ease;
   background-color: rgb(46, 44, 44);
 }
 
@@ -115,14 +142,12 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  background-color: rgba(197, 191, 191, 0.4);
+  color: rgba(255, 255, 255, 0.2);
+  background-color: transparent;
   border: 0;
   cursor: pointer;
   transition: 0.4s;
   font-size: 50px;
-}
-.controller:hover {
-  background-color: rgb(128, 124, 124);
 }
 
 .controller:active {
