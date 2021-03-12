@@ -1,0 +1,103 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+.container {
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.carousel {
+  width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.slider {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  transition: 0.2s all;
+  transform: translateX(-1200px);
+}
+
+.slider-item {
+  position: relative;
+}
+
+.page-number {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  position: absolute;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.page-circles {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 200px;
+  width: 140px;
+  color: transparent;
+  cursor: pointer;
+}
+
+.page-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.page-circle.active {
+  background-color: rgb(46, 44, 44);
+}
+
+.controller {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(197, 191, 191, 0.4);
+  border: 0;
+  cursor: pointer;
+  transition: 0.4s;
+  font-size: 50px;
+}
+.controller:hover {
+  background-color: rgb(128, 124, 124);
+}
+
+.controller:active {
+  transform: translateY(-50%) scale(0.93);
+}
+
+.controller:focus {
+  outline: none;
+}
+
+.prev {
+  left: 0px;
+}
+
+.next {
+  right: 0px;
+}
