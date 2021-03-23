@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite scroll</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <section class="container">
+        <ul class="items">
+          <!-- 전달받은 item(li)들이 렌더 되는 곳 -->
+        </ul>
+      </section>
+    </div>
+
+    <template id="list-item">
+      <li class="item">
+        <i class="item-user fas fa-user-circle"></i>
+        <article class="item-user-content">
+          <div class="item-email">dsef@dfsd.com</div>
+          <div class="item-content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum voluptates nulla culpa explicabo aliquam nemo atque ipsam,
+            cupiditate tenetur. Enim suscipit non vitae explicabo dolores, sequi laudantium ea exercitationem sed.
+          </div>
+        </article>
+      </li>
+    </template>
+
+    <template id="spinner">
+      <div class="spinner-container">
+        <span class="spinner"></span>
+      </div>
+    </template>
+    <template id="modal-container">
+      <div class="modal-container"></div>
+    </template>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
