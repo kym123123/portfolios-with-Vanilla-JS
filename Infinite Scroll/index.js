@@ -14,24 +14,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     items = [...items, ...newItems];
   };
 
+  const callback = (entries, observer) => {
+    if (entries[0].isIntersecting && postId <= lastItem) {
+      window.requestAnimationFrame(() => {
+        $items.appendChild(addSpinner());
+        fetchNextItems(postId++);
+
+        setTimeout(() => {
+          document.querySelector('.spinner-container').replaceWith(addNewItemNodes(newItems, observer));
+        }, 2000);
+      });
+    }
+  };
+
   const options = {
     root: null,
     rootMargin: '0px',
     threshold: 1,
-  };
-
-  const callback = (entries, observer) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting && postId <= lastItem) {
-        window.requestAnimationFrame(() => {
-          $items.appendChild(addSpinner());
-          fetchNextItems(postId++);
-          setTimeout(() => {
-            document.querySelector('.spinner-container').replaceWith(addNewItemNodes(newItems, observer));
-          }, 2000);
-        });
-      }
-    });
   };
 
   const observer = new IntersectionObserver(callback, options);
