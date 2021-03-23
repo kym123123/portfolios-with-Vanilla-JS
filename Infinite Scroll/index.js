@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         fetchNextItems(postId++);
 
         setTimeout(() => {
-          document.querySelector('.spinner-container').replaceWith(addNewItemNodes(newItems, observer));
+          window.requestAnimationFrame(() => {
+            document.querySelector('.spinner-container').replaceWith(addNewItemNodes(newItems, observer));
+          });
         }, 2000);
       });
     }
