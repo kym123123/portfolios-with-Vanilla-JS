@@ -16,8 +16,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.5",
-    "mongoose": "^5.12.2",
-    "nanoid": "^3.1.22"
+    "mongoose": "^5.12.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
