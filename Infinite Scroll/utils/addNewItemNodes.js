@@ -10,8 +10,10 @@ const colors = [
   'linear-gradient(90deg, rgba(1,249,91,1) 0%, rgba(40,232,211,1) 100%)',
   'linear-gradient(90deg, rgba(249,64,1,1) 0%, rgba(232,40,211,1) 100%)',
   'linear-gradient(90deg, rgba(16,249,1,1) 0%, rgba(40,220,232,1) 100%)',
+  'linear-gradient(90deg, rgba(232,225,40,1) 0%, rgba(249,159,1,1) 100%)',
   'linear-gradient(90deg, rgba(249,159,1,1) 0%, rgba(232,225,40,1) 100%)',
   'linear-gradient(90deg, rgba(249,1,200,1) 0%, rgba(232,225,40,1) 100%)',
+  'linear-gradient(90deg, rgba(232,225,40,1) 0%, rgba(249,1,200,1) 100%)',
   'linear-gradient(90deg, rgba(16,249,1,1) 0%, rgba(232,138,40,1) 100%)',
 ];
 const getRandomIndex = () => Math.round(Math.random() * 100) % colors.length;

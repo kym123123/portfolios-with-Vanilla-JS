@@ -1,0 +1,33 @@
+GET http://localhost:3000/mycart
+
+###
+
+POST http://localhost:3000/product/add
+Content-Type: application/json
+
+{
+  "name": "Converse Chuck Taylor All Star High Top",
+  "price": 55,
+  "imageUrl": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/toqshuuheqdl3ljzobnc/converse-chuck-taylor-all-star-high-top-shoe-xX439O.jpg"
+}
+
+###
+
+POST http://localhost:3000/mycart/add/60624c252005d48bc62e9af2
+Content-Type: application/json
+
+{
+  "number_of_product": 1
+}
+
+###
+PUT http://localhost:3000/mycart/edit/60624c252005d48bc62e9af2
+Content-Type: application/json
+
+{
+  "number_of_product": 1
+}
+
+###
+
+DELETE http://localhost:3000/mycart/delete/60624c252005d48bc62e9af2

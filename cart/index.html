@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" defer src="./index.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title"><i class="fas fa-shoe-prints"></i> Sneakers Store</h1>
+      <header class="header"></header>
+      <section class="shopping-container">
+        <h2 class="shopping-title a11y-hidden">sneaker list</h2>
+        <article class="shopping-list">
+          <ul class="items">
+            <!-- item li들이 들어가는곳 -->
+          </ul>
+        </article>
+      </section>
+    </div>
+    <div class="blur-container"></div>
+    <div class="cart-container">
+      <h2 class="cart-title">My Cart</h2>
+      <div class="cart-wrapper"></div>
+      <div class="cart-total">total: $223.0</div>
+      <ul class="cart-items">
+        <!-- cart item li들이 들어가는 곳 -->
+        <div class="cart-empty">My cart is Empty.</div>
+
+      </ul>
+      <button class="cart-order">Place Order</button>
+    </div>
+
+    <template id="item">
+      <li class="item">
+        <img
+          src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f26e1847-941d-456f-a619-c46b5c827856/dbreak-type-mens-shoe-FGjGHz.jpg"
+          alt="sneakers image"
+          class="item-img"
+        />
+        <div class="item-name">nike DBreak-Type</div>
+        <div class="item-price">$90</div>
+        <div class="item-buttons">
+          <button class="item-increase">+</button>
+          <span class="item-number">1</span>
+          <button class="item-decrease disabled" disabled>-</button>
+          <button class="item-add-cart"><i class="fas fa-cart-plus"></i></button>
+        </div>
+      </li>
+    </template>
+
+    <template id="items">
+      <ul class="items"></ul>
+    </template>
+
+    <template id="cart-item">
+      <li class="cart-item">
+        <img
+          src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f26e1847-941d-456f-a619-c46b5c827856/dbreak-type-mens-shoe-FGjGHz.jpg"
+          alt="sneakers image"
+          class="item-img"
+        />
+        <div class="cart-item-name">nike DBreak-Type</div>
+        <div class="cart-item-price">$90</div>
+        <div class="cart-item-buttons">
+          <button class="cart-item-increase">+</button>
+          <span class="cart-item-number">1</span>
+          <button class="cart-item-decrease">-</button>
+          <button class="cart-item-delete"><i class="fas fa-trash"></i></i></button>
+        </div>
+      </li>
+    </template>
+
+    <template id="cart-items">
+      <ul class="cart-items"></ul>
+    </template>
+
+    <template id="cart-empty">
+      <div class="cart-empty">My cart is Empty.</div>
+    </template>
+  </body>
+</html>

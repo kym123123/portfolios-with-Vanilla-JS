@@ -1,11 +1,12 @@
 import addNewItemNodes from './utils/addNewItemNodes.js';
 import addSpinner from './utils/addSpinner.js';
+import addNotification from './utils/addNotification.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   let items = [];
   let newItems = [];
   let postId = 1;
-  let lastItem = 10;
+  let lastItem = 5;
   const $items = document.querySelector('.items');
 
   const fetchNextItems = async postId => {
@@ -17,14 +18,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   const callback = (entries, observer) => {
     if (entries[0].isIntersecting && postId <= lastItem) {
       window.requestAnimationFrame(() => {
-        $items.appendChild(addSpinner());
+        const $spinner = addSpinner();
+        $items.appendChild($spinner);
         fetchNextItems(postId++);
 
         setTimeout(() => {
           window.requestAnimationFrame(() => {
-            document.querySelector('.spinner-container').replaceWith(addNewItemNodes(newItems, observer));
+            $spinner.replaceWith(addNewItemNodes(newItems, observer));
           });
-        }, 2000);
+        }, 1500);
+      });
+    } else if (entries[0].isIntersecting && postId > lastItem) {
+      window.requestAnimationFrame(() => {
+        const $notification = addNotification();
+        $items.appendChild($notification);
+        setTimeout(() => {
+          $notification.classList.add('none');
+
+          $notification.addEventListener('transitionend', () => {
+            window.requestAnimationFrame(() => {
+              $notification.remove();
+              $notification.classList.remove('none');
+            });
+          });
+        }, 1500);
       });
     }
   };
