@@ -122,6 +122,7 @@ button:focus {
 
 .item-add-cart {
   margin-left: 20px;
+  position: relative;
 }
 .item-increase:active,
 .item-decrease:active,
@@ -284,4 +285,33 @@ button:focus {
   font-size: 100px;
   margin-top: 80px;
   text-align: center;
+}
+
+.display-added {
+  background: linear-gradient(90deg, rgba(105, 94, 94, 1) 0%, rgba(50, 40, 40, 1) 100%);
+  color: white;
+  width: 100px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 25px;
+  position: absolute;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  animation: fadeIn 1.5s ease-in forwards;
+  top: -150%;
+  left: -100%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
 }
