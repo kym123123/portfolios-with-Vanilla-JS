@@ -22,6 +22,11 @@ button:focus {
   outline: none;
 }
 
+.error-elem {
+  text-align: center;
+  font-size: 100px;
+}
+
 .a11y-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

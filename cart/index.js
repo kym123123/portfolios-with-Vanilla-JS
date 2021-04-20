@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       const res = await fetch('http://localhost:3000/product');
       items = await res.json();
     } catch (e) {
+      const $error = document.createElement('div');
+      $error.textContent = "Couldn't find the server.";
+      $error.classList.add('error-elem');
+
+      $items.appendChild($error);
       console.log(e);
     }
   };
