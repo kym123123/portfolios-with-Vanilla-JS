@@ -90,6 +90,8 @@ button:focus {
 
 .item-name {
   width: 270px;
+  padding: 50px 0;
+  display: inline-block;
 }
 
 .item-price {

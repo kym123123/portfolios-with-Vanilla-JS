@@ -10,7 +10,6 @@ const options = {
 const callback = (entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      console.log('hello');
       entry.target.firstElementChild.src = entry.target.firstElementChild.dataset.src;
       observer.unobserve(entry.target);
     }
@@ -26,9 +25,8 @@ const getNewProductNode = product => {
   const $priceNode = $newProductNode.querySelector('.item-price');
 
   $newProductNode.classList.add(product._id);
-  // $imgNode.setAttribute('src', product.imageUrl);
   $imgNode.setAttribute('data-src', product.imageUrl);
-  $imgNode.setAttribute('src', 'https://loading.io/mod/spinner/spinner/sample.gif');
+  $imgNode.setAttribute('src', './imgs/loader.gif');
   $nameNode.textContent = product.name;
   $priceNode.textContent = '$' + product.price;
 
