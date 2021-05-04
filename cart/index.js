@@ -4,6 +4,7 @@ import { adjustItemNumber, adjustCartNumber } from './utils/adjustNumber.js';
 import { requestAddCart, requestGetCart } from './utils/requestFunctions.js';
 import renderTotal from './utils/renderTotal.js';
 import Modal from './utils/Modal.js';
+import getScrollContainer from './utils/Scroll.js';
 
 let items = [];
 let myCartItems = [];
@@ -16,6 +17,7 @@ const $items = document.querySelector('.items');
 let $cartItems = document.querySelector('.cart-items');
 
 document.addEventListener('DOMContentLoaded', async () => {
+  let flag = 0;
   const fetchItems = async () => {
     try {
       const res = await fetch('http://localhost:3000/product');
@@ -31,6 +33,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   await fetchItems();
   renderProduct($items, items);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY >= 200 && flag === 0) {
+      document.body.appendChild(getScrollContainer());
+      flag = 1;
+    } else if (window.scrollY < 200 && flag === 1) {
+      const $scrollUpContainer = document.querySelector('.scroll-up-container');
+      $scrollUpContainer.classList.add('disappear');
+
+      $scrollUpContainer.addEventListener('animationend', () => {
+        $scrollUpContainer.remove();
+      });
+      flag = 0;
+    }
+  });
+
   window.customElements.define('product-modal', Modal);
 });
 

@@ -8,7 +8,6 @@ class Modal extends HTMLElement {
   }
   constructor() {
     super();
-    console.log('birth');
     this.attachShadow({ mode: 'open' });
     const $style = document.createElement('style');
     const $newModalItemTemplate = $ModalItemTemplate.cloneNode(true);
@@ -103,9 +102,13 @@ class Modal extends HTMLElement {
         font-size: 20px;
         transition: 0.3s all;
         cursor: pointer;
+        font-weight: normal;
       }
       .modal-close:active{
         transform: scale(0.8);
+      }
+      .modal-close:hover{
+        font-weight: bold;
       }
     `;
 
