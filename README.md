@@ -24,6 +24,7 @@
 2. 장바구니 확인 및 내역 수정
 3. lazy loading 기능 구현 (image가 100% 뷰포트에 노출될 경우 이미지 로딩)
 4. Web Component로 구현한 모달창
+5. pagination 기능 추가
 
 - 추가 구현 예정 기능 -> header에 캐러셀 추가, 코드 리팩토링
 
