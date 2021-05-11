@@ -5,34 +5,43 @@ import { requestAddCart, requestGetCart } from './utils/requestFunctions.js';
 import renderTotal from './utils/renderTotal.js';
 import Modal from './utils/Modal.js';
 import getScrollContainer from './utils/Scroll.js';
+import renderPagination from './utils/renderPagination.js';
 
 let items = [];
 let myCartItems = [];
+let lastPageNumber = 10;
+let currentPageNumber = 1;
 
 const $blurContainer = document.querySelector('.blur-container');
 const $cartContainer = document.querySelector('.cart-container');
 const $totalCost = $cartContainer.querySelector('.cart-total');
-
-const $items = document.querySelector('.items');
+const $paginationContainer = document.querySelector('.pagination-container');
+const $shoppingContainer = document.querySelector('.shopping-container');
+const $shoppingList = document.querySelector('.shopping-list');
 let $cartItems = document.querySelector('.cart-items');
 
 document.addEventListener('DOMContentLoaded', async () => {
   let flag = 0;
+  const $items = document.querySelector('.items');
   const fetchItems = async () => {
     try {
-      const res = await fetch('http://localhost:3000/product');
-      items = await res.json();
+      const res = await fetch(`http://localhost:3000/product/${currentPageNumber}`);
+      console.log(res);
+      const res2 = await res.json();
+      lastPageNumber = res2.lastPage;
+      items = res2.products;
     } catch (e) {
       const $error = document.createElement('div');
       $error.textContent = "Couldn't find the server.";
       $error.classList.add('error-elem');
 
-      $items.appendChild($error);
+      $shoppingContainer.replaceWith($error);
       console.log(e);
     }
   };
   await fetchItems();
   renderProduct($items, items);
+  renderPagination(currentPageNumber, lastPageNumber, $paginationContainer);
 
   window.addEventListener('scroll', () => {
     if (window.scrollY >= 200 && flag === 0) {
@@ -73,11 +82,11 @@ $blurContainer.addEventListener('click', e => {
   $cartContainer.classList.remove('active');
 });
 
-$items.addEventListener('click', adjustItemNumber);
+$shoppingList.addEventListener('click', adjustItemNumber);
 
-$items.addEventListener('click', requestAddCart);
+$shoppingList.addEventListener('click', requestAddCart);
 
-$items.addEventListener('click', e => {
+$shoppingList.addEventListener('click', e => {
   if (e.target.matches('.item-name') || e.target.matches('.item-img')) {
     document.body.prepend(document.createElement('product-modal'));
     const $modal = document.querySelector('product-modal');
@@ -107,4 +116,31 @@ $cartItems.addEventListener('click', async e => {
   myCartItems = await adjustCartNumber(e);
   console.log(myCartItems);
   $totalCost.textContent = renderTotal(myCartItems);
+});
+
+$paginationContainer.addEventListener('click', async e => {
+  if (!e.target.matches('.pagination-li')) return;
+
+  console.log(e.target.textContent);
+
+  const fetchItems = async () => {
+    try {
+      currentPageNumber = +e.target.textContent;
+      const res = await fetch(`http://localhost:3000/product/${currentPageNumber}`);
+      console.log(res);
+      const res2 = await res.json();
+      lastPageNumber = res2.lastPage;
+      items = res2.products;
+    } catch (e) {
+      const $error = document.createElement('div');
+      $error.textContent = "Couldn't find the server.";
+      $error.classList.add('error-elem');
+
+      $shoppingContainer.replaceWith($error);
+      console.log(e);
+    }
+  };
+  await fetchItems();
+  renderProduct(document.querySelector('.items'), items);
+  renderPagination(+e.target.textContent, lastPageNumber, $paginationContainer);
 });

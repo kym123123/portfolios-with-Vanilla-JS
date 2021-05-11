@@ -34,15 +34,22 @@ const getNewProductNode = product => {
 };
 
 const renderProducts = products => {
-  const $newFragNode = document.createDocumentFragment();
+  const $newUlNode = $newItemsNode.cloneNode(true);
+  $newUlNode.classList.add('slideLeftIn');
   products.map(getNewProductNode).forEach(product => {
     observer.observe(product);
-    $newFragNode.appendChild(product);
+    $newUlNode.appendChild(product);
   });
 
-  return $newFragNode;
+  console.log($newUlNode);
+  return $newUlNode;
 };
 
-export default (parentNode, products) => {
-  parentNode.appendChild(renderProducts(products));
+export default (targetNode, products) => {
+  console.log(targetNode, 'target');
+  targetNode.classList.remove('slideLeftIn');
+  targetNode.classList.add('slideLeftOut');
+  targetNode.addEventListener('animationend', () => {
+    targetNode.replaceWith(renderProducts(products));
+  });
 };

@@ -21,15 +21,26 @@ const port = 3000; // http://localhost:3000으로 설정
 // req의 bodyparser
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
-app.use(cors());  
+app.use(cors());
 
 // GET, PUT, POST, DELETE 모두 3가지 매개변수를 받음, 1. url 2. 미들웨어(매개변수 3개일 경우에만) 3. 콜백함수
 
-app.get('/product', async (req, res) => {
+app.get('/product/:page', async (req, res) => {
+  const page = req.params.page || 1;
+
   try {
-    const products = await Product.find().exec();
+    const products = await Product.find()
+      .limit(6)
+      .skip((page - 1) * 6)
+      .exec();
     console.log(products);
-    res.status(200).send(products);
+
+    const pageCount = await Product.countDocuments().exec();
+    res.set('Last-Page', Math.ceil(pageCount / 6));
+    res.set('Total-Products', pageCount);
+    // res.set('Access-Control-Allow-Headers', 'Last-Page', 'Total-Products');
+
+    res.status(200).send({ products, lastPage: Math.ceil(pageCount / 6) });
   } catch (e) {
     console.log(e);
     res.status(500).send();
@@ -37,7 +48,6 @@ app.get('/product', async (req, res) => {
 });
 
 app.get('/mycart', async (req, res) => {
-  let cartArr = [];
   try {
     const carts = await Cart.find().exec();
     console.log(carts);
@@ -49,11 +59,13 @@ app.get('/mycart', async (req, res) => {
 
 app.post('/product/add', async (req, res) => {
   const { name, price, imageUrl } = req.body;
+  console.log(req.body, 'body');
   const product = new Product({ name, price, imageUrl });
-  console.log(product);
+  console.log(product, 'hello');
   try {
     await product.save();
-    res.body = product;
+    // res.body = product;
+    res.send(product);
     console.log(res.body);
   } catch (e) {
     res.status(500).send({ error: e });

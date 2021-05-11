@@ -59,6 +59,7 @@ button:focus {
 
 .shopping-container {
   position: relative;
+  transition: 0.3s all;
   width: 100%;
   height: auto;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -78,6 +79,34 @@ button:focus {
   cursor: pointer;
   transition: 0.3s all;
 }
+@keyframes slideLeftIn {
+  0% {
+    /* opacity: 0; */
+    transform: translateX(100%);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: translateX(0);
+  }
+}
+@keyframes slideLeftOut {
+  0% {
+    /* opacity: 0; */
+    transform: translateX(0%);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: translateX(-100%);
+  }
+}
+
+.items.slideLeftIn {
+  animation: slideLeftIn 0.4s ease-in-out;
+}
+.items.slideLeftOut {
+  animation: slideLeftOut 0.4s ease-in-out;
+}
+
 .item:hover {
   background-color: rgb(209, 202, 202);
 }
@@ -146,6 +175,49 @@ button:focus {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.pagination-container {
+  padding: 60px 0 100px 0;
+  position: relative;
+  /* z-index: 1; */
+  background-color: rgb(250, 249, 249);
+}
+
+.pagination-ul {
+  display: flex;
+  margin: 0 auto;
+  width: 40%;
+  align-items: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  justify-content: space-evenly;
+}
+
+.pagination-li {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background-color: transparent;
+  text-align: center;
+  transition: 0.3s all;
+  border-radius: 50%;
+}
+
+.pagination-li.current {
+  border-radius: 50%;
+  color: white;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(82, 69, 59);
+  line-height: 50px;
+  text-align: center;
+}
+.pagination-li:hover {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(161, 152, 145);
+}
+
 .cart-item-number {
   padding: 0 5px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -170,6 +242,7 @@ button:focus {
   background-color: rgba(0, 0, 0, 0.6);
   transition: all 0.3s;
   display: none;
+  z-index: 1;
 }
 
 .blur-container.active {
@@ -179,13 +252,14 @@ button:focus {
 
 .cart-container.active {
   transform: translate3D(0%, 0, 0);
-  z-index: 1;
+  z-index: 2;
   box-shadow: -5px 1px 9px 3px rgba(0, 0, 0, 0.39);
 }
 
 .cart-container {
   padding: 20px;
   position: fixed;
+  z-index: 2;
   top: 0;
   right: 0;
   height: 100vh;
@@ -332,7 +406,7 @@ button:focus {
 }
 
 .scroll-up-container {
-  z-index: 10;
+  z-index: 0;
   cursor: pointer;
   position: fixed;
   opacity: 0.5;
